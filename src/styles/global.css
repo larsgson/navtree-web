@@ -438,6 +438,7 @@ body.focus-mode .verse-focus-active {
 .listen-verse-card {
   border-color: var(--border);
   background-color: var(--bg-surface, transparent);
+  outline: none;
 }
 
 .listen-verse-images {
