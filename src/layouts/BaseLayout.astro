@@ -198,7 +198,7 @@ const { title = "Qombi Book Reader" } = Astro.props
           const idx = $currentSegmentIdx.get()
           const sectionIdx = entries[idx]?.sectionIndex ?? 0
           const card = document.querySelector(`[data-section-idx="${sectionIdx}"]`)
-          console.log("[syncHighlight]", { playState, paused, isActive, onPage, entriesLen: entries.length, idx, sectionIdx, cardFound: !!card })
+          console.log("[syncHighlight]", { playState, paused, isActive, onPage, audioPath: $audioPagePath.get(), currentPath: window.location.pathname, entriesLen: entries.length, idx, sectionIdx, cardFound: !!card })
           if (!isActive || !onPage) return
           if (card) card.classList.add("verse-focus-active")
         }
