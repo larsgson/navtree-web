@@ -377,6 +377,22 @@ const { title = "Qombi Book Reader" } = Astro.props
         window.addEventListener("touchmove", () => {
           if ($focusMode.get()) $focusMode.set(false)
         })
+
+        // Re-apply highlight after React re-renders strip the class
+        const mainEl = document.querySelector("main")
+        if (mainEl) {
+          new MutationObserver(() => {
+            const isActive = $audioPlayState.get() !== "idle" || !!$pausedState.get()
+            if (!isActive || $focusMode.get() || !isOnAudioPage()) return
+            const entries = $segmentEntries.get()
+            const idx = $currentSegmentIdx.get()
+            const sectionIdx = entries[idx]?.sectionIndex ?? 0
+            const card = document.querySelector(`[data-section-idx="${sectionIdx}"]`)
+            if (card && !card.classList.contains("verse-focus-active")) {
+              card.classList.add("verse-focus-active")
+            }
+          }).observe(mainEl, { childList: true, subtree: true })
+        }
       }
 
       if (!(window as any).__audioUIInitialized) {
