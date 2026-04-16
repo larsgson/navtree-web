@@ -1,7 +1,7 @@
 level = "collection"
 
 [images]
-base_url = "https://www.gutenberg.org/files/14838/14838-h/images"
+base_url = "/images/PRB"
 
 [image]
 filename = "peter04.jpg"

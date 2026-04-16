@@ -415,13 +415,12 @@ body.audio-paused .focus-panel-content .listen-verse-images img { animation-play
 /* ---- Verse/Section highlight ---- */
 
 .verse-focus-active {
-  outline: 3px solid #e74c3c;
-  outline-offset: 2px;
+  box-shadow: 0 0 0 3px #e74c3c;
   background: rgba(231, 76, 60, 0.08);
 }
 
 body.focus-mode .verse-focus-active {
-  outline-color: transparent;
+  box-shadow: none;
   opacity: 0.4;
   background: rgba(231, 76, 60, 0.04);
 }
