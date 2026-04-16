@@ -48,7 +48,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 950;
-  width: min(90vw, 48rem);
+  width: min(90vw, 24rem);
   overflow: visible;
   border: 3px solid #e74c3c;
   border-radius: 0.75rem;
