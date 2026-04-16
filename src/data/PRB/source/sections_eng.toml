@@ -1,0 +1,62 @@
+# Section titles for The Tale of Peter Rabbit (English)
+#
+# These are editorial additions — not part of the original text.
+# Each section is keyed by its number and maps to a position in the
+# story flow (see source/text/eng.md). The first_paragraph prefix
+# anchors where the section heading appears in the continuous text.
+
+[01]
+title = "Once upon a time"
+first_paragraph = "Once upon a time there were four little Rabbits"
+
+[02]
+title = "Mother's warning"
+first_paragraph = "'Now my dears,' said old Mrs. Rabbit one morning"
+
+[03]
+title = "Setting off"
+first_paragraph = "Then old Mrs. Rabbit took a basket and her umbrella"
+
+[04]
+title = "The naughty one"
+first_paragraph = "But Peter, who was very naughty"
+
+[05]
+title = "In the garden"
+first_paragraph = "And then, feeling rather sick"
+
+[06]
+title = "Mr. McGregor!"
+first_paragraph = "Mr. McGregor was on his hands and knees"
+
+[07]
+title = "Caught!"
+first_paragraph = "He lost one of his shoes among the cabbages"
+
+[08]
+title = "A narrow escape"
+first_paragraph = "Peter gave himself up for lost"
+
+[09]
+title = "The tool-shed"
+first_paragraph = "And rushed into the tool-shed"
+
+[10]
+title = "Through the window"
+first_paragraph = "And tried to put his foot upon Peter"
+
+[11]
+title = "Lost and afraid"
+first_paragraph = "He found a door in a wall"
+
+[12]
+title = "The gate!"
+first_paragraph = "He went back towards the tool-shed"
+
+[13]
+title = "Home at last"
+first_paragraph = "Mr. McGregor hung up the little jacket"
+
+[14]
+title = "The end"
+first_paragraph = "I am sorry to say that Peter was not very well"

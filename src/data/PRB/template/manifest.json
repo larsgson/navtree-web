@@ -1,0 +1,17 @@
+{
+  "files": [
+    {
+      "path": "index.toml"
+    },
+    {
+      "path": "01/index.toml"
+    },
+    {
+      "path": "01/01.md"
+    },
+    {
+      "path": "locales/eng.toml"
+    }
+  ],
+  "total_files": 4
+}

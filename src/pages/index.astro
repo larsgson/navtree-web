@@ -1,0 +1,31 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro"
+import BookGridIsland from "../components/BookGridIsland"
+import { discoverBooks, loadBookStructure, loadLocaleData, discoverLocales } from "../lib/book-loader"
+import { resolveImageUrl } from "../lib/image-utils"
+
+const bookIds = discoverBooks()
+const bookList = bookIds.map((id) => {
+  const structure = loadBookStructure(id)
+  if (!structure) return null
+  const locales = discoverLocales(id)
+  const locale = locales.length > 0 ? loadLocaleData(id, locales[0]) : null
+  const pageCount = structure.categories.reduce((sum, c) => sum + c.stories.length, 0)
+  return {
+    id,
+    title: locale?.bookTitle || id,
+    description: locale?.categories?.[structure.categories[0]?.id]?.description || "",
+    coverImage: structure.coverImage,
+    categoryCount: structure.categories.length,
+    pageCount,
+    imageConfig: structure.imageConfig,
+  }
+}).filter(Boolean) as any[]
+---
+
+<BaseLayout title="Book Reader">
+  <div class="max-w-4xl mx-auto p-6">
+    <h1 class="text-2xl font-bold mb-6">Illustrated Books</h1>
+    <BookGridIsland client:load books={bookList} />
+  </div>
+</BaseLayout>

@@ -1,0 +1,11 @@
+level = "collection"
+
+[images]
+base_url = "https://www.gutenberg.org/files/14838/14838-h/images"
+
+[image]
+filename = "peter04.jpg"
+
+[[categories]]
+id = "01"
+image = "peter08.jpg"

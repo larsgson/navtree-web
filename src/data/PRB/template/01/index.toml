@@ -1,0 +1,15 @@
+level = "category"
+id = "01"
+beg = 1
+count = 1
+
+[image]
+filename = "peter08.jpg"
+
+[audio]
+dramatic_url = "https://archive.org/download/beatrixpotterstories_1705_librivox/collectionbeatrixpotter_01_potter_128kb.mp3"
+dramatic_hq_url = "https://archive.org/download/beatrixpotterstories_1705_librivox/collectionbeatrixpotter_01_potter.mp3"
+
+[[stories]]
+id = "01"
+image = "peter08.jpg"

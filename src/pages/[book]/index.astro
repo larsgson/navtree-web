@@ -1,0 +1,49 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro"
+import PageNavigationIsland from "../../components/PageNavigationIsland"
+import { discoverBooks, loadBookStructure, loadLocaleData, loadMarkdownContent, discoverLocales } from "../../lib/book-loader"
+import { parseMarkdownIntoSections, extractSectionToc } from "../../lib/markdown-parser"
+import type { SectionTocEntry } from "../../lib/markdown-parser"
+
+export function getStaticPaths() {
+  const bookIds = discoverBooks()
+  return bookIds.map((id) => {
+    const structure = loadBookStructure(id)!
+    const locales = discoverLocales(id)
+    const locale = locales.length > 0 ? loadLocaleData(id, locales[0]) : null
+
+    let sectionToc: SectionTocEntry[] = []
+    const isSingleStory = structure.categories.length === 1 && structure.categories[0].stories.length === 1
+    if (isSingleStory) {
+      const cat = structure.categories[0]
+      const story = cat.stories[0]
+      const md = loadMarkdownContent(id, cat.id, story.id)
+      if (md && locale) {
+        const parsed = parseMarkdownIntoSections(md, locale, cat.id)
+        sectionToc = extractSectionToc(parsed)
+      }
+    }
+
+    return {
+      params: { book: id },
+      props: { bookId: id, structure, localeData: locale, sectionToc },
+    }
+  })
+}
+
+const { bookId, structure, localeData, sectionToc } = Astro.props
+const pageTitle = localeData?.bookTitle || bookId
+---
+
+<BaseLayout title={pageTitle}>
+  <div class="max-w-4xl mx-auto p-4">
+    <PageNavigationIsland
+      client:load
+      bookId={bookId}
+      structure={structure}
+      localeData={localeData}
+      imageConfig={structure.imageConfig}
+      sectionToc={sectionToc}
+    />
+  </div>
+</BaseLayout>
