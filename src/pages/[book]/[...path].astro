@@ -87,7 +87,7 @@ const pageTitle = props.localeData?.bookTitle || props.bookId
 
 <BaseLayout title={pageTitle}>
   {props.pageType === "category" ? (
-    <div class="max-w-4xl mx-auto p-4">
+    <div class="max-w-sm mx-auto p-4">
       <PageNavigationIsland
         client:load
         bookId={props.bookId}
@@ -98,7 +98,7 @@ const pageTitle = props.localeData?.bookTitle || props.bookId
       />
     </div>
   ) : (
-    <div class="max-w-3xl mx-auto p-4">
+    <div class="max-w-sm mx-auto p-4">
       <PageReaderIsland
         client:load
         bookId={props.bookId}
