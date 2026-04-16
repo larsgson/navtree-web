@@ -23,9 +23,9 @@ const bookList = bookIds.map((id) => {
 }).filter(Boolean) as any[]
 ---
 
-<BaseLayout title="Book Reader">
+<BaseLayout title="Qombi Book Reader">
   <div class="max-w-4xl mx-auto p-6">
-    <h1 class="text-2xl font-bold mb-6">Illustrated Books</h1>
+    <h1 class="text-2xl font-bold mb-6">Qombi Book Reader</h1>
     <BookGridIsland client:load books={bookList} />
   </div>
 </BaseLayout>

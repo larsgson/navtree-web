@@ -6,7 +6,7 @@ interface Props {
   title?: string
 }
 
-const { title = "Illustrated Book Reader" } = Astro.props
+const { title = "Qombi Book Reader" } = Astro.props
 ---
 
 <!doctype html>
@@ -19,7 +19,7 @@ const { title = "Illustrated Book Reader" } = Astro.props
   </head>
   <body class="min-h-screen flex flex-col">
     <header class="bg-primary text-white h-14 flex items-center px-4 sticky top-0 z-50">
-      <a href="/" class="text-lg font-semibold hover:opacity-90">Book Reader</a>
+      <a href="/" class="text-lg font-semibold hover:opacity-90">Qombi Book Reader</a>
     </header>
     <main class="flex-1">
       <slot />
