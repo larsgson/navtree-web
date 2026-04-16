@@ -446,7 +446,7 @@ body.focus-mode .verse-focus-active {
 
 .listen-verse-card {
   border-color: var(--border);
-  background-color: var(--bg-surface, transparent);
+  background-color: #ffffff;
   outline: none;
 }
 
@@ -462,14 +462,22 @@ body.focus-mode .verse-focus-active {
 }
 
 .listen-verse-text-primary.has-images {
-  margin-top: -2.3rem;
-  padding: 1.1rem 0.75rem 0.5rem;
-  background: linear-gradient(to bottom, transparent 0%, var(--bg) 30%);
+  padding: 0.5rem 0.75rem 0.5rem;
   position: relative;
-  z-index: 1;
 }
 
-.listen-verse-text-primary.has-images > :first-child {
-  margin-top: 1rem;
+.listen-verse-images {
+  position: relative;
+}
+
+.listen-verse-images::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3rem;
+  background: linear-gradient(to bottom, transparent, #ffffff);
+  pointer-events: none;
 }
 

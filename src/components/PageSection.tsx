@@ -58,7 +58,7 @@ export default function PageSection({
       )}
 
       {section.heading && (
-        <div className={hasImages ? "" : "px-3 pt-3"}>
+        <div className={hasImages ? "relative z-10" : "px-3 pt-3"}>
           <h3 className={`text-base font-semibold ${hasImages ? "px-3 pt-3" : ""}`}>
             {section.heading}
           </h3>
