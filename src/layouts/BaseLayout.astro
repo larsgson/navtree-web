@@ -182,8 +182,9 @@ const { title = "Qombi Book Reader" } = Astro.props
         function isOnAudioPage() {
           const audioPath = $audioPagePath.get()
           if (!audioPath) return false
-          const currentPath = window.location.pathname.replace(/\/$/, "")
-          return currentPath === audioPath || currentPath === `/${audioPath}`
+          const currentPath = window.location.pathname.replace(/\/$/, "").toLowerCase()
+          const normalizedAudioPath = audioPath.replace(/\/$/, "").toLowerCase()
+          return currentPath === normalizedAudioPath || currentPath === `/${normalizedAudioPath}`
         }
 
         function syncHighlight() {
