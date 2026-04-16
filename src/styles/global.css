@@ -414,8 +414,9 @@ body.audio-paused .focus-panel-content .listen-verse-images img { animation-play
 
 /* ---- Verse/Section highlight ---- */
 
-.verse-focus-active {
-  box-shadow: 0 0 0 3px #e74c3c;
+.verse-focus-active,
+.verse-focus-active:hover {
+  box-shadow: 0 0 0 3px #e74c3c !important;
   background: rgba(231, 76, 60, 0.08);
 }
 
