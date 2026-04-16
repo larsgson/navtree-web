@@ -7,8 +7,7 @@ count = 1
 filename = "peter08.jpg"
 
 [audio]
-dramatic_url = "https://archive.org/download/beatrixpotterstories_1705_librivox/collectionbeatrixpotter_01_potter_128kb.mp3"
-dramatic_hq_url = "https://archive.org/download/beatrixpotterstories_1705_librivox/collectionbeatrixpotter_01_potter.mp3"
+dramatic_url = "/audio/PRB/01.mp3"
 
 [[stories]]
 id = "01"
