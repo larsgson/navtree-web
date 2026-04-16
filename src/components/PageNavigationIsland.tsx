@@ -71,6 +71,9 @@ export default function PageNavigationIsland({
                 key={entry.id}
                 href={`/${bookId}/${cat.id}/${story.id}#${entry.id}`}
                 className="chapter-card"
+                onClick={() => {
+                  sessionStorage.setItem("autoplay-section", String(entry.sectionIndex))
+                }}
               >
                 {entry.image ? (
                   <img

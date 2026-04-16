@@ -3,8 +3,10 @@ import {
   $segmentEntries,
   $focusMode,
   $audioPagePath,
+  $audioPlayState,
   $audioToast,
   $currentSegmentIdx,
+  $playerVisible,
   playSegment,
   setAudioForCategory,
   unlockAudio,
@@ -129,22 +131,49 @@ export default function PageReaderIsland({
     )
 
     if (entryIdx >= 0) {
-      if ($focusMode.get()) {
-        window.dispatchEvent(new CustomEvent("focus-panel-refresh", { detail: { idx: entryIdx } }))
-      } else {
-        $focusMode.set(true)
-      }
+      $focusMode.set(true)
       playSegment(entryIdx)
-      if ($focusMode.get()) {
-        requestAnimationFrame(() => {
-          window.dispatchEvent(new CustomEvent("focus-panel-refresh", { detail: { idx: entryIdx } }))
-        })
-      }
+      requestAnimationFrame(() => {
+        window.dispatchEvent(new CustomEvent("focus-panel-refresh", { detail: { idx: entryIdx } }))
+      })
     } else {
       $audioToast.set("No timing available for this section")
-      $focusMode.set(false)
     }
   }
+
+  useEffect(() => {
+    const autoplaySection = sessionStorage.getItem("autoplay-section")
+    if (autoplaySection !== null) {
+      sessionStorage.removeItem("autoplay-section")
+      const sectionIndex = parseInt(autoplaySection, 10)
+      if (!isNaN(sectionIndex)) {
+        $audioPagePath.set(`${bookId}/${categoryId}/${pageId}`)
+        setupAudio()
+        const entries = $segmentEntries.get()
+        const entryIdx = entries.findIndex(
+          (e) => e.pageId === pageId && e.sectionIndex === sectionIndex && e.endTime > e.startTime,
+        )
+        if (entryIdx >= 0) {
+          $focusMode.set(true)
+          playSegment(entryIdx).then(() => {
+            requestAnimationFrame(() => {
+              window.dispatchEvent(new CustomEvent("focus-panel-refresh", { detail: { idx: entryIdx } }))
+            })
+          }).catch(() => {
+            // Autoplay blocked (iOS) — exit focus mode and pulse the section
+            $focusMode.set(false)
+            $audioPlayState.set("idle")
+            $playerVisible.set(false)
+            const card = document.querySelector(`[data-section-idx="${sectionIndex}"]`)
+            if (card) {
+              card.classList.add("autoplay-invite")
+              setTimeout(() => card.classList.remove("autoplay-invite"), 3000)
+            }
+          })
+        }
+      }
+    }
+  }, [bookId, categoryId, pageId])
 
   const tocEntries = extractSectionToc(parsed)
   const sectionAnchorIds: Record<number, string> = {}

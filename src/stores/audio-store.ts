@@ -55,18 +55,20 @@ function getAudio(): HTMLAudioElement {
   return audioEl
 }
 
-function seekAndPlay(url: string, startTime: number) {
+function seekAndPlay(url: string, startTime: number): Promise<void> {
   const el = getAudio()
   if (audioSrc === url) {
     el.currentTime = startTime
-    el.play().catch(() => {})
+    return el.play().catch(() => {})
   } else {
     audioSrc = url
     el.src = url
-    el.addEventListener("canplay", function onCanPlay() {
-      el.removeEventListener("canplay", onCanPlay)
-      el.currentTime = startTime
-      el.play().catch(() => {})
+    return new Promise<void>((resolve, reject) => {
+      el.addEventListener("canplay", function onCanPlay() {
+        el.removeEventListener("canplay", onCanPlay)
+        el.currentTime = startTime
+        el.play().then(resolve).catch(reject)
+      })
     })
   }
 }
@@ -138,17 +140,17 @@ function advanceSegment(idx: number) {
   })
 }
 
-export function playSegment(idx: number) {
+export function playSegment(idx: number): Promise<void> {
   const entries = $segmentEntries.get()
   const entry = entries[idx]
   if (!entry || !audioContext?.audioUrl) {
     stopAll()
-    return
+    return Promise.resolve()
   }
 
   if (entry.startTime === 0 && entry.endTime === 0) {
     $audioToast.set("No timing available")
-    return
+    return Promise.resolve()
   }
 
   $currentSegmentIdx.set(idx)
@@ -162,7 +164,7 @@ export function playSegment(idx: number) {
     imageUrl: entry.imageUrl || $playerCardInfo.get().imageUrl,
   })
 
-  seekAndPlay(audioContext.audioUrl, entry.startTime)
+  return seekAndPlay(audioContext.audioUrl, entry.startTime)
 }
 
 export function pausePlayback() {
